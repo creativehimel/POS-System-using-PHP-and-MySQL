@@ -1,5 +1,8 @@
 <?php
+
 include('config/function.php');
+require('config/dbcon.php');
+global $conn;
 // Add admin code
 if(isset($_POST['saveAdmin'])){
     $name = validate($_POST['name']);
@@ -49,6 +52,13 @@ if(isset($_POST['updateAdmin'])){
     $password = validate($_POST['password']);
     $phone = validate($_POST['phone']);
     $status = validate($_POST['status']);
+    $emailCheckQuery = "SELECT * FROM admins WHERE email='$email' AND id != '$id'";
+    $emailCheck = mysqli_query($conn, $emailCheckQuery);
+    if ($emailCheck){
+        if (mysqli_num_rows($emailCheck) > 0){
+            redirect('edit-admin.php?id='.$id, 'Email already used by another user.');
+        }
+    }
     if ($password != ''){
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
     }else{
