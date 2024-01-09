@@ -111,5 +111,20 @@ function deleteRecord($tableName, $id){
     $result = mysqli_query($conn, $query);
     return $result;
 }
+//
+function checkParam($type)
+{
+    if (isset($_GET[$type])){
+        if($_GET[$type] != ''){
+            return $_GET[$type];
+        }else{
+            echo '<h5>ID not found!</h5>';
+            return false;
+        }
+    }else{
+        echo '<h5>No ID given in params!</h5>';
+        return false;
+    }
+}
 
 ?>

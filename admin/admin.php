@@ -46,6 +46,10 @@
                                             <tbody>
                                                 <?php
                                                     $admins = getAllRecord('admins');
+                                                    if(!$admins){
+                                                        echo '<h4>Something went wrong!</h4>';
+                                                        return false;
+                                                    }
                                                     if(mysqli_num_rows($admins) > 0){
                                                        foreach($admins as $admin){
                                                        ?>
@@ -63,8 +67,9 @@
                                                      ?>
                                                     </td>
                                                     <td>
-                                                        <a href="edit-admin.php" class="btn btn-primary btn-sm">Edit</a>
-                                                        <a href="delete-admin.php"
+                                                        <a href="edit-admin.php?id=<?php echo $admin['id']; ?>"
+                                                            class="btn btn-primary btn-sm">Edit</a>
+                                                        <a href="delete-admin.php?id=<?php echo $admin['id']; ?>"
                                                             class="btn btn-danger btn-sm">Delete</a>
                                                     </td>
                                                 </tr>
