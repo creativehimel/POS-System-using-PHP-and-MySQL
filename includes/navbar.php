@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -31,10 +31,19 @@
                     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+            <div >
+                <?php if(isset($_SESSION['loggedIn'])){
+                    ?>
+                    <div class="d-flex align-items-baseline justify-content-center">
+                        <p class="mr-2"><?php echo $_SESSION['loggedInUser']['name'] ?></p>
+                        <a href="logout.php" class="btn btn-danger">Logout</a>
+                    </div>
+                <?php }else{
+                    ?>
+                    <a href="login.php" class="btn btn-primary">Login</a>
+                <?php } ?>
+                
+            </div>
         </div>
     </div>
 </nav>
