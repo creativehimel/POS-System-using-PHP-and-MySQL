@@ -42,6 +42,20 @@
         </div>
     </li>
     <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategory" aria-expanded="true"
+            aria-controls="collapseAdmin">
+            <!-- <i class="fas fa-fw fa-lis"></i> -->
+            <i class="fas fa-list-ul"></i>
+            <span>Category</span>
+        </a>
+        <div id="collapseCategory" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="create-categories.php">Add Category</a>
+                <a class="collapse-item" href="categories.php">All Categories</a>
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAdmin" aria-expanded="true"
             aria-controls="collapseAdmin">
             <i class="fas fa-fw fa-cog"></i>

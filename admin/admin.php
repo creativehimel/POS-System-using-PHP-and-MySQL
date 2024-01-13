@@ -45,7 +45,7 @@
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                    $admins = getAllRecord('admins');
+                                                    $admins = getAllRecord('admins', '');
                                                     if(!$admins){
                                                         echo '<h4>Something went wrong!</h4>';
                                                         return false;

@@ -82,4 +82,43 @@ if(isset($_POST['updateAdmin'])){
         redirect('create-admin.php', 'Please fill required fields.');
     }
     }
+
+// Add Category Code
+if(isset($_POST['saveCategory'])){
+    $name = validate($_POST['name']);
+    $description = validate($_POST['description']);
+    $status = validate($_POST['status']);
+    $data = [
+            'name' => $name,
+            'description' => $description,
+            'status' => $status
+        ];
+        
+    $result = insertRecord('categories', $data);
+    if($result){
+        redirect('categories.php', 'Category created successfully.');
+    }else{
+        redirect('create-categories.php', 'Something went wrong!');
+    }
+}
+
+//Update Category code 
+if(isset($_POST['updateCategory'])){
+    $catId = validate($_POST['id']);
+    $name = validate($_POST['name']);
+    $description = validate($_POST['description']);
+    $status = validate($_POST['status']);
+    $data = [
+            'name' => $name,
+            'description' => $description,
+            'status' => $status
+        ];
+        
+    $result = updateRecord('categories', $catId, $data);
+    if($result){
+        redirect('categories.php', 'Category updated successfully.');
+    }else{
+        redirect('edit-categories.php', 'Something went wrong!');
+    }
+}
 ?>

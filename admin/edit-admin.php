@@ -33,18 +33,12 @@
                                 <?php alertMessage(); ?>
                                 <form action="code.php" method="POST">
                                     <?php
-                                    if(isset($_GET['id'])){
-                                        if($_GET['id'] != ''){
-                                            $adminId = $_GET['id'];
-                                        }else{
-                                            echo '<h5>ID not found!</h5>';
-                                            return false;
-                                        }
-                                    }else{
-                                        echo '<h5>No ID given in params!</h5>';
+                                    $paramId = checkParam('id');
+                                    if(!is_numeric($paramId)){
+                                        echo '<h5>'.$paramId.'</h5>';
                                         return false;
                                     }
-                                    $adminRecord = getRecordById('admins',$adminId);
+                                    $adminRecord = getRecordById('admins',$paramId);
                                     if($adminRecord){
                                         if($adminRecord['status'] == 200){
                                             ?>
