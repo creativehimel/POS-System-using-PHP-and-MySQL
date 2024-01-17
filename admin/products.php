@@ -47,6 +47,8 @@
                                                                 <th>ID</th>
                                                                 <th>Name</th>
                                                                 <th>Image</th>
+                                                                <th>Price</th>
+                                                                <th>Quantity</th>
                                                                 <th>Status</th>
                                                                 <th>Action</th>
                                                             </tr>
@@ -62,6 +64,9 @@
                                                                 <img src="../<?php echo $product['image'] ?>" style="width:50px; height:50px;" alt="Product Image">
                                                                 
                                                             </td>
+                                                            
+                                                            <td><?php echo $product['price'] ?></td>
+                                                            <td><?php echo $product['quantity'] ?></td>
                                                             <td><?php
                                                             if($product['status'] == 1){
                                                                 echo '<span class="badge bg-success text-white">Active</span>';
@@ -74,7 +79,9 @@
                                                                 <a href="edit-products.php?id=<?php echo $product['id']; ?>"
                                                                     class="btn btn-primary btn-sm">Edit</a>
                                                                 <a href="delete-products.php?id=<?php echo $product['id']; ?>"
-                                                                    class="btn btn-danger btn-sm">Delete</a>
+                                                                    class="btn btn-danger btn-sm"
+                                                                    onclick="return confirm('Are you sure you want to delete this product!')"
+                                                                    >Delete</a>
                                                             </td>
                                                         </tr>
                                                         <?php } ?>

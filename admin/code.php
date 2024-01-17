@@ -157,3 +157,49 @@ if(isset($_POST['saveProduct'])){
         redirect('create-products.php', 'Something went wrong!');
     }
 }
+
+
+//Update Product Data
+
+if(isset($_POST['updateProduct'])){
+    $id = validate($_POST['id']);
+    $productRecord = getRecordById('products',$id);
+    if(!$productRecord){
+        redirect('products.php','No Product Found.');
+    }else{}
+    $name = validate($_POST['name']);
+    $category_id = validate($_POST['category_id']);
+    $price = validate($_POST['price']);
+    $quantity = validate($_POST['quantity']);
+    $description = validate($_POST['description']);
+    $status = validate($_POST['status']);
+    if($_FILES['image']['size'] > 0){
+        $path = '../assets/uploads/products';
+        $image_ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+        $fileName = 'product-'.time() .'.'. $image_ext;
+        move_uploaded_file($_FILES['image']['tmp_name'], $path .'/'. $fileName);
+        $finalImage = $path .'/'. $fileName;
+        $deleteImage = "../".$productRecord['data']['image'];
+        if(file_exists($deleteImage)){
+            unlink($deleteImage);
+        }
+    }else{
+        $finalImage = $productRecord['data']['image'];
+    }
+    $data = [
+            'category_id' => $category_id,
+            'name' => $name,
+            'description' => $description,
+            'price' => $price,
+            'quantity' => $quantity,
+            'image' => $finalImage,
+            'status' => $status
+        ];
+        
+    $result = updateRecord('products', $id, $data);
+    if($result){
+        redirect('products.php', 'Product updated successfully.');
+    }else{
+        redirect('create-products.php', 'Something went wrong!');
+    }
+}
