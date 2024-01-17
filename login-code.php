@@ -26,7 +26,7 @@ if(isset($_POST['signInBtn']))
                     'phone'=> $row['phone'],
                 ];
 
-                redirect('admin', 'Logged in successfully');
+                redirect('admin/index.php', 'Logged in successfully');
 
             }else{
                 redirect('login.php', 'Invalid Email address!! Please enter right email address.');

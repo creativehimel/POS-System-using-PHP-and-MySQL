@@ -121,4 +121,39 @@ if(isset($_POST['updateCategory'])){
         redirect('edit-categories.php', 'Something went wrong!');
     }
 }
-?>
+
+// Create a product code
+if(isset($_POST['saveProduct'])){
+    
+    $name = validate($_POST['name']);
+    $category_id = validate($_POST['category_id']);
+    $price = validate($_POST['price']);
+    $quantity = validate($_POST['quantity']);
+    $description = validate($_POST['description']);
+    $status = validate($_POST['status']);
+    if($_FILES['image']['size'] > 0){
+        $path = '../assets/uploads/products';
+        $image_ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+        $fileName = 'product-'.time() .'.'. $image_ext;
+        move_uploaded_file($_FILES['image']['tmp_name'], $path .'/'. $fileName);
+        $finalImage = $path .'/'. $fileName;
+    }else{
+        $finalImage = '';
+    }
+    $data = [
+            'category_id' => $category_id,
+            'name' => $name,
+            'description' => $description,
+            'price' => $price,
+            'quantity' => $quantity,
+            'image' => $finalImage,
+            'status' => $status
+        ];
+        
+    $result = insertRecord('products', $data);
+    if($result){
+        redirect('products.php', 'Product created successfully.');
+    }else{
+        redirect('create-products.php', 'Something went wrong!');
+    }
+}
